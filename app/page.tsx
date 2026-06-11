@@ -1,8 +1,9 @@
-export default function Home() {
-    return (
-        <>  
-        <h1>Hello, Next.js!</h1>
-        <p>This is my first Next.js app.</p>
-        </>
-    )
+import Heading from "./components/Heading";
+
+export default function HomePage() {
+  return (
+    <div>
+      <Heading>Welcome to Next.js</Heading>
+    </div>
+  );
 }

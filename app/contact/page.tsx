@@ -1,7 +1,9 @@
+import Heading from "../components/Heading";
+
 export default function ContactPage() {
     return (
         <>
-            <h1>Contact Me</h1>
+            <Heading>Contact Me</Heading>
             <ul>
                 <li>Instagram</li>
                 <li>Email</li>
