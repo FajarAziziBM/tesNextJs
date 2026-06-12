@@ -1,10 +1,11 @@
-import Heading from "@components/Heading";
+import Heading from "@/components/Heading";
 
 export default function PostPage() {
     return (
         <>  
         <Heading>Belajar NextJS</Heading>
-        <p>Belajar NextJS</p>
+        <img src="/images/image-1.jpg" alt="" width={640} height={360}/>
+        <p>Halaman dari blog</p>
         </>
     )
 }
