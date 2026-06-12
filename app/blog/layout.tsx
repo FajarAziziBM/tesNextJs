@@ -9,11 +9,11 @@ export default function BlogLayout({
 ) {
     return (
         <div style={{ display: "flex" }}>
-            <div style={{ border: "1px solid black" }}>
+            <div className="">
                 Sidebar
 
             </div>
-            <div>{children}</div>
+            <div className="px-4">{children}</div>
         </div>
 
     )

@@ -1,22 +1,15 @@
-import Link from "next/link";
 import Heading from "@/components/Heading";
+import PostCard from "@/components/PostCart";
+
+
 
 export default function BlogPage() {
-    return (
-        <>
-            <Heading>Blog</Heading>
+  return (
+    <>
+      <Heading>List of posts</Heading>
 
-            <p>Berikut List Blog
-            </p>
-            <ul>
-                <li>
-                    <Link href="/blog/belajar-nextjs">Belajar NextJs</Link>
-                </li>
-                <li>
-                    <Link href="/blog/latihan-route-nextjs" prefetch={false}>Latihan Route Nextjs</Link>
-                </li>
-            </ul>
-
-        </>
-    )
+        <PostCard/>
+      
+    </>
+  );
 }
