@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { roboto } from "./fonts";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gray-900 text-white">
+      <body
+        className={`${roboto.variable} font-sans min-h-screen bg-gray-900 text-white`}
+      >
         <header>
           <Navbar />
         </header>

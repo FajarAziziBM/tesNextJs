@@ -1,5 +1,5 @@
 @import 'tailwindcss';
 
-body {
-    font-family: 'Courier New', Courier, monospace;
+@theme {
+  --font-sans: var(--font-roboto);
 }
