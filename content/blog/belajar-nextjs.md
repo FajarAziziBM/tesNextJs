@@ -1,3 +1,16 @@
+---
+{
+    slug: "belajar-nextjs",
+    title: "Belajar Next.js",
+    image: "/images/image-1.jpg",
+    date: "13.01.2022",
+    author: "Admin",
+    excerpt:
+      "Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat vulputate. Ut vulputate est non quam dignissim elementum. Donec a ullamcorper diam.",
+  }
+
+---
+
 # Belajar Next.js
 
 ## Apa itu Next.js?

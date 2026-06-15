@@ -1,28 +1,29 @@
 import Heading from "@/components/Heading";
-import { readFile } from "node:fs/promises";
-import { marked } from "marked";
+import { getPostBySlug } from "@/lib/posts";
 
 export default async function PostPage() {
-    const text = await readFile(
-        "./content/blog/belajar-nextjs.md",
-        "utf-8"
-    );
-
-    const html = await marked.parse(text);
+    const post = await getPostBySlug("belajar-nextjs");
 
     return (
         <>
-            <Heading>Belajar NextJS</Heading>
+            <Heading>{post.title}</Heading>
+
+            <p className="pb-2 text-sm italic">
+                {post.date} - {post.author}
+            </p>
+
             <img
-                src="/images/image-1.jpg"
-                alt="" width={840}
+                src={post.image}
+                alt={post.title}
+                width={840}
                 height={660}
                 className="mb-2 rounded-md"
             />
+
             <article
                 className="prose prose-slate"
                 dangerouslySetInnerHTML={{
-                    __html: html,
+                    __html: post.body,
                 }}
             />
         </>
