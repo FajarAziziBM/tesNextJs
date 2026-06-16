@@ -1,8 +1,16 @@
 import Heading from "@/components/Heading";
-import { getPostBySlug } from "@/lib/posts";
+import { getPost } from "@/lib/posts";
 
-export default async function PostPage() {
-    const post = await getPostBySlug("belajar-nextjs");
+interface PageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export default async function PostPage({ params }: PageProps) {
+  const { slug } = await params;
+
+  const post = await getPost(slug);
 
     return (
         <>
