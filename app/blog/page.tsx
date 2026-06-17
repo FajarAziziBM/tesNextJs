@@ -12,8 +12,6 @@ export const metadata: Metadata = createMetadata({
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
-  console.log(posts);
-
   return (
     <>
       <Heading>Blog</Heading>

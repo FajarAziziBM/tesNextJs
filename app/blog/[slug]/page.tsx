@@ -1,4 +1,5 @@
 import Heading from "@/components/Heading";
+import SherLinkButton from "@/components/SherLinkButton";
 import { getPost } from "@/lib/posts";
 import { createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -34,9 +35,14 @@ export default async function PostPage({
     <>
       <Heading>{post.title}</Heading>
 
-      <p className="pb-2 text-sm italic">
-        {post.date} - {post.author}
-      </p>
+      <div className="flex gap-3 pb-2 items-baseline">
+        <p className="pb-2 text-sm italic">
+          {post.date} - {post.author}
+        </p>
+
+        <SherLinkButton />
+        
+      </div>
 
       <img
         src={post.image}
