@@ -19,7 +19,7 @@ export async function getPost(slug: string): Promise<Post> {
     image: data.image,
     date: data.date,
     author: data.author,
-    excerpt: data.excerpt,
+    description: data.description,
     body: await marked.parse(content),
   };
 }

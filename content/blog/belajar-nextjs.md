@@ -1,12 +1,12 @@
 ---
 {
-    slug: "belajar-nextjs",
-    title: "Belajar Next.js",
+    slug: "Pendahuluan Next Js",
+    title: "Pendahuluan Next Js",
     image: "/images/image-1.jpg",
     date: "13.01.2022",
     author: "Admin",
-    excerpt:
-      "Ut pretium ultricies dignissim. Sed sit amet mi eget urna placerat vulputate. Ut vulputate est non quam dignissim elementum. Donec a ullamcorper diam.",
+    description:
+      "asfmasdmasmd as dasmd,asfm,asmf,masf.",
   }
 
 ---

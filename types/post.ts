@@ -4,9 +4,9 @@
 export interface Post {
   slug: string;
   title: string;
+  description: string;
   image: string;
   date: string;
   author: string;
-  excerpt: string;
-  body?: string; // hanya dipakai di detail page
+  body?: string;
 }

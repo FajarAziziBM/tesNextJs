@@ -1,5 +1,7 @@
 import Heading from "@/components/Heading";
 import { getPost } from "@/lib/posts";
+import { createMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{
@@ -7,33 +9,49 @@ interface PageProps {
   }>;
 }
 
-export default async function PostPage({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
   const post = await getPost(slug);
 
-    return (
-        <>
-            <Heading>{post.title}</Heading>
+  return createMetadata({
+    title: post.title,
+    description: post.description,
+    image: post.image,
+  });
+}
 
-            <p className="pb-2 text-sm italic">
-                {post.date} - {post.author}
-            </p>
+export default async function PostPage({
+  params,
+}: PageProps) {
+  const { slug } = await params;
 
-            <img
-                src={post.image}
-                alt={post.title}
-                width={840}
-                height={660}
-                className="mb-2 rounded-md"
-            />
+  const post = await getPost(slug);
 
-            <article
-                className="prose prose-slate"
-                dangerouslySetInnerHTML={{
-                    __html: post.body,
-                }}
-            />
-        </>
-    );
+  return (
+    <>
+      <Heading>{post.title}</Heading>
+
+      <p className="pb-2 text-sm italic">
+        {post.date} - {post.author}
+      </p>
+
+      <img
+        src={post.image}
+        alt={post.title}
+        width={840}
+        height={660}
+        className="mb-2 rounded-md"
+      />
+
+      <article
+        className="prose prose-slate"
+        dangerouslySetInnerHTML={{
+          __html: post.body ?? "",
+        }}
+      />
+    </>
+  );
 }

@@ -1,15 +1,12 @@
 ---
-
 {
-slug: "belajar-route-di-nextjs",
-title: "belajar-route-di-nextjs",
-image: "/images/image-3.jpg",
-date: "13.01.2022",
-author: "Admin",
-excerpt:
-"Pelajari cara kerja routing di Next.js, mulai dari static route, nested route, dynamic route hingga route groups pada App Router."
+  slug: "belajar-route-di-nextjs",
+  title: "belajar-route-di-nextjs",
+  image: "/images/image-3.jpg",
+  date: "13.01.2022",
+  author: "Admin",
+  description: "Pelajari cara kerja routing di Next.js, mulai dari static route, nested route, dynamic route hingga route groups pada App Router.",
 }
-
 ---
 
 # Belajar Route di Next.js

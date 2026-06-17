@@ -34,7 +34,7 @@ export default function PostCard({ post }: PostCardProps) {
           {post.author}
         </p>
 
-        <p className="mt-4 text-gray-700">{post.excerpt}</p>
+        <p className="mt-4 text-gray-700">{post.description}</p>
       </div>
     </article>
   );
