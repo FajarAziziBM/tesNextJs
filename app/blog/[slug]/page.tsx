@@ -1,6 +1,6 @@
 import Heading from "@/components/Heading";
 import SherLinkButton from "@/components/SherLinkButton";
-import { getPost } from "@/lib/posts";
+import { getPost, getSlug } from "@/lib/posts";
 import { createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
@@ -8,6 +8,17 @@ interface PageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+/**
+ * WAJIB untuk output: 'export'
+ */
+export async function generateStaticParams() {
+  const slugs = await getSlug();
+
+  return slugs.map((slug) => ({
+    slug,
+  }));
 }
 
 export async function generateMetadata({
@@ -41,7 +52,6 @@ export default async function PostPage({
         </p>
 
         <SherLinkButton />
-        
       </div>
 
       <img

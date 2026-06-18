@@ -3,7 +3,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import matter from "gray-matter";
 import { marked } from "marked";
-import type { Post } from "@/types/post";
+import type { Post,  } from "@/types/post";
 
 const POSTS_DIR = "./content/blog";
 
