@@ -1,0 +1,57 @@
+{
+  "data": [
+    {
+      "id": 26,
+      "documentId": "loqmn0tn7i404w69beqa9vdr",
+      "slug": "mengenal-strapi-sebagai-headless-cms-modern",
+      "title": "Mengenal Strapi sebagai Headless CMS Modern",
+      "description": "Pelajari bagaimana Strapi membantu mengelola konten secara fleksibel melalui API.",
+      "publishedAt": "2026-06-18T10:12:30.734Z",
+      "author": "admin",
+      "body": "# Mengenal Strapi CMS\n\nStrapi adalah **Headless CMS** berbasis Node.js.\n\n## Fitur Utama\n\n- REST API\n- GraphQL\n- Media Library\n\n### Kelebihan\n\n1. Open Source\n2. Mudah dikustomisasi\n3. Mendukung berbagai database\n\n*Strapi sangat cocok untuk frontend modern.*\n\n~~Tidak terikat pada satu framework frontend.~~\n\n> Content management menjadi lebih mudah.\n\n```bash\nnpx create-strapi@latest\n```\n\n![Strapi](https://picsum.photos/800/401)\n\nWebsite:\nhttps://strapi.io",
+      "image": {
+        "id": 13,
+        "documentId": "uj9o229t61klhkilhkespa2h",
+        "url": "/uploads/image_5_a97f7f0f51.jpg"
+      }
+    },
+    {
+      "id": 25,
+      "documentId": "eqmlhj3w8geihgx8j22g2z2k",
+      "slug": "optimasi-seo-untuk-website-modern",
+      "title": "Optimasi SEO untuk Website Modern",
+      "description": "Teknik dasar meningkatkan peringkat website di mesin pencari.",
+      "publishedAt": "2026-06-18T10:12:14.542Z",
+      "author": "admin",
+      "body": "# Optimasi SEO\n\nSEO membantu website lebih mudah ditemukan.\n\n## Faktor Penting\n\n- Title\n- Description\n- Sitemap\n\n### Checklist\n\n1. Gunakan heading yang jelas\n2. Tambahkan metadata\n3. Optimalkan gambar\n\n**Konten berkualitas sangat penting.**\n\n*User experience juga berpengaruh.*\n\n~~Keyword stuffing tidak disarankan.~~\n\n> Fokuslah pada kebutuhan pembaca.\n\n```html\n<meta name=\"description\" content=\"SEO Guide\" />\n```\n\n![SEO](https://picsum.photos/800/403)\n\nReferensi:\nhttps://developers.google.com/search",
+      "image": {
+        "id": 16,
+        "documentId": "dn2oxbwppgulf4girl7bkq5h",
+        "url": "/uploads/image_6_22e747b109.jpg"
+      }
+    },
+    {
+      "id": 24,
+      "documentId": "a0d74edd6917q7zjxjm5jldc",
+      "slug": "panduan-git-dan-git-hub-untuk-tim-developer",
+      "title": "Panduan Git dan GitHub untuk Tim Developer",
+      "description": "Belajar workflow Git dan GitHub untuk kolaborasi proyek.",
+      "publishedAt": "2026-06-18T10:12:03.416Z",
+      "author": "admin",
+      "body": "# Git dan GitHub\n\nGit adalah sistem version control yang paling populer.\n\n## Workflow Dasar\n\n1. Clone repository\n2. Buat branch\n3. Commit perubahan\n4. Push ke remote\n\n### Contoh Commit\n\n```bash\ngit add .\ngit commit -m \"feat: add blog page\"\ngit push origin main\n```\n\n**Commit message harus jelas.**\n\n*Gunakan branch untuk fitur baru.*\n\n~~Jangan commit file sensitif.~~\n\n> Version control adalah keterampilan wajib developer.\n\n![GitHub](https://picsum.photos/800/407)\n\nWebsite:\nhttps://github.com",
+      "image": {
+        "id": 15,
+        "documentId": "r8u4xgmuxyg24ty3rczaam6z",
+        "url": "/uploads/image_3_6d7cace269.jpg"
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 3,
+      "pageCount": 3,
+      "total": 8
+    }
+  }
+}

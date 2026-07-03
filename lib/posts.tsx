@@ -1,41 +1,105 @@
-// lib/posts.ts
-
-import { readFile, readdir } from "node:fs/promises";
-import matter from "gray-matter";
 import { marked } from "marked";
-import type { Post,  } from "@/types/post";
+import qs from "qs";
 
-const POSTS_DIR = "./content/blog";
+const STRAPI_URL = "http://127.0.0.1:1337";
+const BASE_URL = `${STRAPI_URL}/api/posts`;
 
-export async function getSlug(): Promise<string[]> {
-  const files = await readdir(POSTS_DIR);
+export type Post = {
+  slug: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  author: string;
+  body: string;
+  image: string;
+};
 
-  return files
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => file.replace(".md", ""));
-}
+type StrapiResponse<T> = {
+  data: T[];
+};
 
-export async function getPost(slug: string): Promise<Post> {
-  if (!slug) {
-    throw new Error("Slug is required");
+async function fetchPosts(query?: string) {
+  const url = query ? `${BASE_URL}?${query}` : BASE_URL;
+
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch posts");
   }
 
-  const file = await readFile(`${POSTS_DIR}/${slug}.md`, "utf-8");
-  const { content, data } = matter(file);
+  return res.json();
+}
 
-  return {
-    slug,
-    title: data.title,
-    image: data.image,
-    date: data.date,
-    author: data.author,
-    description: data.description,
-    body: await marked.parse(content),
-  };
+function buildQuery(params: object) {
+  return qs.stringify(params, {
+    encodeValuesOnly: true,
+  });
 }
 
 export async function getAllPosts(): Promise<Post[]> {
-  const slugs = await getSlug();
+  const query = buildQuery({
+    sort: ["publishedAt:desc"],
+    pagination: {
+      page: 1,
+      pageSize: 25,
+    },
+    populate: {
+      image: true,
+    },
+  });
 
-  return Promise.all(slugs.map((slug) => getPost(slug)));
+  const json: StrapiResponse<any> = await fetchPosts(query);
+
+  return json.data.map(normalizePost);
+}
+
+export async function getPost(
+  slug: string
+): Promise<Post | null> {
+  const query = buildQuery({
+    filters: {
+      slug: {
+        $eq: slug,
+      },
+    },
+    populate: {
+      image: true,
+    },
+  });
+
+  const json: StrapiResponse<any> = await fetchPosts(query);
+
+  const item = json.data[0];
+
+  return item ? normalizePost(item) : null;
+}
+
+export async function getSlugs(): Promise<string[]> {
+  const query = buildQuery({
+    fields: ["slug"],
+  });
+
+  const json: StrapiResponse<{ slug: string }> =
+    await fetchPosts(query);
+
+  return json.data.map((item) => item.slug);
+}
+
+function normalizePost(item: any): Post {
+  return {
+    slug: item.slug,
+    title: item.title,
+    description: item.description,
+    publishedAt: item.publishedAt,
+    author: item.author,
+    body: marked(item.body, {
+      headerIds: false,
+      mangle: false,
+    }),
+    image: item.image?.url
+      ? `${STRAPI_URL}${item.image.url}`
+      : "",
+  };
 }

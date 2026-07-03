@@ -8,7 +8,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint",
-        "lint:fix": "eslint --fix"
+        "lint:fix": "eslint --fix",
+        "fetch-posts": "tsx scripts/fetch-posts.ts"
     },
     "keywords": [],
     "author": "",
@@ -19,6 +20,7 @@
         "gray-matter": "^4.0.3",
         "marked": "^18.0.5",
         "next": "^16.2.9",
+        "qs": "^6.15.2",
         "react": "^19.2.7",
         "react-dom": "^19.2.7"
     },
@@ -26,8 +28,13 @@
         "@tailwindcss/postcss": "^4.3.0",
         "@tailwindcss/typography": "^0.5.20",
         "@types/node": "25.9.3",
+        "@types/qs": "^6.15.1",
         "@types/react": "19.2.17",
+        "eslint": "^9.39.4",
+        "eslint-config-next": "^16.2.10",
         "tailwindcss": "^4.3.0",
-        "typescript": "6.0.3"
+        "tsx": "^4.22.4",
+        "typescript": "6.0.3",
+        "typescript-eslint": "^8.62.1"
     }
 }

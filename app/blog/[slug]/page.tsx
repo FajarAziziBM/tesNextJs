@@ -1,8 +1,11 @@
+// app/blog/[slug]/page.tsx
+
 import Heading from "@/components/Heading";
 import SherLinkButton from "@/components/SherLinkButton";
-import { getPost, getSlug } from "@/lib/posts";
+import { getPost, getSlugs } from "@/lib/posts";
 import { createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: Promise<{
@@ -10,11 +13,8 @@ interface PageProps {
   }>;
 }
 
-/**
- * WAJIB untuk output: 'export'
- */
 export async function generateStaticParams() {
-  const slugs = await getSlug();
+  const slugs = await getSlugs();
 
   return slugs.map((slug) => ({
     slug,
@@ -27,6 +27,10 @@ export async function generateMetadata({
   const { slug } = await params;
 
   const post = await getPost(slug);
+
+  if (!post) {
+    return {};
+  }
 
   return createMetadata({
     title: post.title,
@@ -42,30 +46,40 @@ export default async function PostPage({
 
   const post = await getPost(slug);
 
+  if (!post) {
+    notFound();
+  }
+
   return (
     <>
       <Heading>{post.title}</Heading>
 
-      <div className="flex gap-3 pb-2 items-baseline">
-        <p className="pb-2 text-sm italic">
-          {post.date} - {post.author}
+      <div className="flex gap-3 pb-4 items-center">
+        <p className="text-sm italic">
+          {new Date(
+            post.publishedAt
+          ).toLocaleDateString("id-ID")}
+          {" • "}
+          {post.author}
         </p>
 
         <SherLinkButton />
       </div>
 
-      <img
-        src={post.image}
-        alt={post.title}
-        width={840}
-        height={660}
-        className="mb-2 rounded-md"
-      />
+      {post.image && (
+        <img
+          src={post.image}
+          alt={post.title}
+          width={840}
+          height={660}
+          className="rounded-md mb-6"
+        />
+      )}
 
       <article
-        className="prose prose-slate"
+        className="prose prose-slate max-w-none"
         dangerouslySetInnerHTML={{
-          __html: post.body ?? "",
+          __html: post.body,
         }}
       />
     </>

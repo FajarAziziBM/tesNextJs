@@ -1,6 +1,7 @@
 // components/PostCard.tsx
 // Deskripsi: Komponen presentational untuk menampilkan 1 kartu blog post
 
+import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/types/post";
 
@@ -13,9 +14,11 @@ export default function PostCard({ post }: PostCardProps) {
     <article className="flex gap-6">
       {/* Thumbnail */}
       <div className="w-52 shrink-0">
-        <img
+        <Image
           src={post.image}
           alt={post.title}
+          width={208}
+          height={144}
           className="h-36 w-full rounded-lg object-cover shadow-md"
         />
       </div>

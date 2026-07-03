@@ -1,3 +1,5 @@
+// app/blog/page.tsx
+
 import Heading from "@/components/Heading";
 import PostCard from "@/components/PostCart";
 import { getAllPosts } from "@/lib/posts";
@@ -12,6 +14,7 @@ export const metadata: Metadata = createMetadata({
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
+
   return (
     <>
       <Heading>Blog</Heading>
