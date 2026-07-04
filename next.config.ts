@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+
   images: {
     dangerouslyAllowLocalIP: true,
     domains: ["127.0.0.1"],

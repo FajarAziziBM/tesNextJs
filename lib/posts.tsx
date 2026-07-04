@@ -1,18 +1,10 @@
+// lib/posts.tsx
 import { marked } from "marked";
 import qs from "qs";
+import type { Post } from "@/types/post";
 
 const STRAPI_URL = "http://127.0.0.1:1337";
 const BASE_URL = `${STRAPI_URL}/api/posts`;
-
-export type Post = {
-  slug: string;
-  title: string;
-  description: string;
-  publishedAt: string;
-  author: string;
-  body: string;
-  image: string;
-};
 
 type StrapiResponse<T> = {
   data: T[];
@@ -52,12 +44,10 @@ export async function getAllPosts(): Promise<Post[]> {
 
   const json: StrapiResponse<any> = await fetchPosts(query);
 
-  return json.data.map(normalizePost);
+  return Promise.all(json.data.map(normalizePost));
 }
 
-export async function getPost(
-  slug: string
-): Promise<Post | null> {
+export async function getPost(slug: string): Promise<Post | null> {
   const query = buildQuery({
     filters: {
       slug: {
@@ -73,7 +63,7 @@ export async function getPost(
 
   const item = json.data[0];
 
-  return item ? normalizePost(item) : null;
+  return item ? await normalizePost(item) : null;
 }
 
 export async function getSlugs(): Promise<string[]> {
@@ -87,17 +77,14 @@ export async function getSlugs(): Promise<string[]> {
   return json.data.map((item) => item.slug);
 }
 
-function normalizePost(item: any): Post {
+async function normalizePost(item: any): Promise<Post> {
   return {
     slug: item.slug,
     title: item.title,
     description: item.description,
     publishedAt: item.publishedAt,
     author: item.author,
-    body: marked(item.body, {
-      headerIds: false,
-      mangle: false,
-    }),
+    body: await marked.parse(item.body),
     image: item.image?.url
       ? `${STRAPI_URL}${item.image.url}`
       : "",

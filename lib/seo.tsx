@@ -1,3 +1,4 @@
+//src/lib/seo.ts
 import type { Metadata } from "next";
 
 type SEOProps = {

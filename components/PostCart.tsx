@@ -1,6 +1,4 @@
 // components/PostCard.tsx
-// Deskripsi: Komponen presentational untuk menampilkan 1 kartu blog post
-
 import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/types/post";
@@ -12,7 +10,6 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   return (
     <article className="flex gap-6">
-      {/* Thumbnail */}
       <div className="w-52 shrink-0">
         <Image
           src={post.image}
@@ -23,7 +20,6 @@ export default function PostCard({ post }: PostCardProps) {
         />
       </div>
 
-      {/* Content */}
       <div className="flex-1">
         <Link
           href={`/blog/${post.slug}`}
@@ -33,11 +29,20 @@ export default function PostCard({ post }: PostCardProps) {
         </Link>
 
         <p className="mt-1 text-sm text-gray-500">
-          Published <span className="underline">{post.date}</span> by{" "}
-          {post.author}
+          Published{" "}
+          <span className="underline">
+            {new Date(post.publishedAt).toLocaleDateString("id-ID", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </span>{" "}
+          by {post.author}
         </p>
 
-        <p className="mt-4 text-gray-700">{post.description}</p>
+        <p className="mt-4 text-gray-700">
+          {post.description}
+        </p>
       </div>
     </article>
   );

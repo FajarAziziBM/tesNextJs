@@ -1,5 +1,4 @@
 // app/blog/[slug]/page.tsx
-
 import Heading from "@/components/Heading";
 import SherLinkButton from "@/components/SherLinkButton";
 import { getPost, getSlugs } from "@/lib/posts";
@@ -7,12 +6,19 @@ import { createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const dynamicParams = true;
+
+export const revalidate = 60;
+
 interface PageProps {
   params: Promise<{
     slug: string;
   }>;
 }
 
+/* =========================
+   STATIC PARAMS (SSG)
+========================= */
 export async function generateStaticParams() {
   const slugs = await getSlugs();
 
@@ -21,6 +27,9 @@ export async function generateStaticParams() {
   }));
 }
 
+/* =========================
+   METADATA SEO
+========================= */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -28,9 +37,7 @@ export async function generateMetadata({
 
   const post = await getPost(slug);
 
-  if (!post) {
-    return {};
-  }
+  if (!post) return {};
 
   return createMetadata({
     title: post.title,
@@ -39,6 +46,9 @@ export async function generateMetadata({
   });
 }
 
+/* =========================
+   PAGE COMPONENT
+========================= */
 export default async function PostPage({
   params,
 }: PageProps) {
@@ -56,10 +66,7 @@ export default async function PostPage({
 
       <div className="flex gap-3 pb-4 items-center">
         <p className="text-sm italic">
-          {new Date(
-            post.publishedAt
-          ).toLocaleDateString("id-ID")}
-          {" • "}
+          {new Date(post.publishedAt).toLocaleDateString("id-ID")} •{" "}
           {post.author}
         </p>
 
@@ -78,9 +85,7 @@ export default async function PostPage({
 
       <article
         className="prose prose-slate max-w-none"
-        dangerouslySetInnerHTML={{
-          __html: post.body,
-        }}
+        dangerouslySetInnerHTML={{ __html: post.body }}
       />
     </>
   );

@@ -7,4 +7,4 @@ belajar logika main componen di pakai typesricpt
     slug bisa rupanya di gunakan pada mekanisme route next js
 
 belajar fetch data dari api apk headless cms strapi
-
+    ada juga metode revalidate
