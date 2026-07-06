@@ -16,8 +16,10 @@ export default function PostCard({ post }: PostCardProps) {
           alt={post.title}
           width={208}
           height={144}
+          unoptimized
           className="h-36 w-full rounded-lg object-cover shadow-md"
         />
+
       </div>
 
       <div className="flex-1">

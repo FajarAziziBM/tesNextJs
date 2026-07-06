@@ -1,3 +1,4 @@
+// app/page.tsx
 import Heading from "@/components/Heading";
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/seo";

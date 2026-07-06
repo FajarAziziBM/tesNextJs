@@ -6,6 +6,8 @@ import type { Post } from "@/types/post";
 const STRAPI_URL = "http://127.0.0.1:1337";
 const BASE_URL = `${STRAPI_URL}/api/posts`;
 
+export const CACHE_TAG_POSTS = "posts";
+
 type StrapiResponse<T> = {
   data: T[];
 };
@@ -14,7 +16,11 @@ async function fetchPosts(query?: string) {
   const url = query ? `${BASE_URL}?${query}` : BASE_URL;
 
   const res = await fetch(url, {
-    cache: "no-store",
+
+    next: {
+      tags: [CACHE_TAG_POSTS],
+    },
+
   });
 
   if (!res.ok) {

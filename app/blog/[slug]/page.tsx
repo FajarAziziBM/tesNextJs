@@ -5,6 +5,7 @@ import { getPost, getSlugs } from "@/lib/posts";
 import { createMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 export const dynamicParams = true;
 
@@ -21,6 +22,10 @@ interface PageProps {
 ========================= */
 export async function generateStaticParams() {
   const slugs = await getSlugs();
+
+  if (!slugs) {
+    return [];
+  };
 
   return slugs.map((slug) => ({
     slug,
@@ -74,11 +79,12 @@ export default async function PostPage({
       </div>
 
       {post.image && (
-        <img
+        <Image
           src={post.image}
           alt={post.title}
           width={840}
           height={660}
+          unoptimized
           className="rounded-md mb-6"
         />
       )}
