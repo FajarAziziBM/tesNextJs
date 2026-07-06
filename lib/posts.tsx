@@ -1,4 +1,5 @@
 // lib/posts.tsx
+
 import { marked } from "marked";
 import qs from "qs";
 import type { Post } from "@/types/post";
@@ -12,15 +13,35 @@ type StrapiResponse<T> = {
   data: T[];
 };
 
+type StrapiPaginatedResponse<T> = {
+  data: T[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+};
+
+export type PostsPagination = {
+  posts: Post[];
+  pagination: {
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    total: number;
+  };
+};
+
 async function fetchPosts(query?: string) {
   const url = query ? `${BASE_URL}?${query}` : BASE_URL;
 
   const res = await fetch(url, {
-
     next: {
       tags: [CACHE_TAG_POSTS],
     },
-
   });
 
   if (!res.ok) {
@@ -36,21 +57,39 @@ function buildQuery(params: object) {
   });
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+export async function getPosts({
+  page = 1,
+  pageSize = 5,
+}: {
+  page?: number;
+  pageSize?: number;
+} = {}): Promise<PostsPagination> {
   const query = buildQuery({
     sort: ["publishedAt:desc"],
     pagination: {
-      page: 1,
-      pageSize: 25,
+      page,
+      pageSize,
     },
     populate: {
       image: true,
     },
   });
 
-  const json: StrapiResponse<any> = await fetchPosts(query);
+  const json: StrapiPaginatedResponse<any> = await fetchPosts(query);
 
-  return Promise.all(json.data.map(normalizePost));
+  return {
+    posts: await Promise.all(json.data.map(normalizePost)),
+    pagination: json.meta.pagination,
+  };
+}
+
+export async function getAllPosts(): Promise<Post[]> {
+  const { posts } = await getPosts({
+    page: 1,
+    pageSize: 1000,
+  });
+
+  return posts;
 }
 
 export async function getPost(slug: string): Promise<Post | null> {
@@ -77,8 +116,7 @@ export async function getSlugs(): Promise<string[]> {
     fields: ["slug"],
   });
 
-  const json: StrapiResponse<{ slug: string }> =
-    await fetchPosts(query);
+  const json: StrapiResponse<{ slug: string }> = await fetchPosts(query);
 
   return json.data.map((item) => item.slug);
 }
